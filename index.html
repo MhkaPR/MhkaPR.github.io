@@ -19,6 +19,7 @@
     function embedVideo() {
         const videoUrl = document.getElementById('videoUrl').value; // Get value using element ID
         const videoId = getYoutubeVideoId(videoUrl);
+        alert(videoId);
       if (videoId) {
         player = new YT.Player('player', {
           videoId: videoId,
