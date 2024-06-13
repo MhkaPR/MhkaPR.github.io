@@ -17,8 +17,8 @@
     var player;
 
     function embedVideo() {
-      const videoUrl = document.getElementById('https://www.youtube.com/embed/7HnSBCShKCk').value;
-      const videoId = getYoutubeVideoId(videoUrl); // Function to extract video ID
+        const videoUrl = document.getElementById('videoUrl').value; // Get value using element ID
+        const videoId = getYoutubeVideoId(videoUrl);
       if (videoId) {
         player = new YT.Player('player', {
           videoId: videoId,
