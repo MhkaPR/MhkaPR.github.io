@@ -19,20 +19,20 @@
         <![endif]-->
         
         <script src="" async defer>
+function downloadFile(url, filename) {
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  link.style.display = 'none';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
 
-            
-const apiKey = 'YOUR_API_KEY';
-const videoId = 'dQw4w9WgXcQ'; // Example video ID
-
-const url = `https://www.googleapis.com/youtube/v3/search`;
-
-fetch(url)
-  .then(response => response.json())
-  .then(data => {
-    const title = data.items[0].snippet.title;
-    console.log(`Video Title: ${title}`);
-  })
-  .catch(error => console.error(error));
+// Example usage
+const downloadLink = 'https://www.youtube.com/embed/7HnSBCShKCk';
+const filename = 'myfile.txt';
+downloadFile(downloadLink, filename);
 
         </script>
     </body>
