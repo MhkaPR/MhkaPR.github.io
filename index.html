@@ -1,32 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>File Downloader</title>
-</head>
-<body>
-    <h1>Download a File</h1>
-    <p>Enter the URL of the file you want to download:</p>
-    <form action="#">
-        <input type="url" id="downloadLink" placeholder="Enter URL here">
-        <button type="button" onclick="downloadFile()">Download</button>
-    </form>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
 
-    <script>
-        function downloadFile() {
-            // Security precaution: Don't allow downloading executable files
-            const link = document.getElementById("downloadLink").value;
-            if (link.endsWith(".exe") || link.endsWith(".bat")) {
-                alert("Downloading executable files is not allowed for security reasons.");
-                return;
-            }
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        
+        <script src="" async defer>
 
-            // Simulate download (for demonstration purposes only)
-            // In a real application, you would need server-side scripting
-            // to handle the download process.
-            console.log("Simulating download:", link);
-            alert("Download started! (This is a simulation)");
-        }
-    </script>
-</body>
+            
+const apiKey = 'YOUR_API_KEY';
+const videoId = 'dQw4w9WgXcQ'; // Example video ID
+
+const url = `https://www.googleapis.com/youtube/v3/search`;
+
+fetch(url)
+  .then(response => response.json())
+  .then(data => {
+    const title = data.items[0].snippet.title;
+    console.log(`Video Title: ${title}`);
+  })
+  .catch(error => console.error(error));
+
+        </script>
+    </body>
 </html>
