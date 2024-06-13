@@ -8,40 +8,30 @@
 
 <body>
   <h1>Enter YouTube Video URL</h1>
-  <input type="text" id="videoUrl" placeholder="Paste YouTube URL here">
-  <button onclick="embedVideo()">Embed Video</button>
   <br>
-  <div id="player"></div>
-  <script src="https://www.youtube.com/iframe_api"></script>
+  <div id="player">
+    <input type="text"><br>
+    <button>download file</button>
+  </div>
   <script>
-    var player;
+    const urlInput = document.querySelector("input");
+    const downloadBtn = document.querySelector("button");
 
-    function embedVideo() {
-        const videoUrl = document.getElementById('https://www.youtube.com/embed/7HnSBCShKCk').value; // Get value using element ID
-        const videoId = getYoutubeVideoId(videoUrl);
-        alert(videoId);
-      if (videoId) {
-        player = new YT.Player('player', {
-          videoId: videoId,
-          events: {
-            'onReady': onPlayerReady
-          }
-        });
-      } else {
-        alert("Invalid YouTube URL. Please enter a valid URL.");
+
+    downloadBtn.addEventListener("click" , async () => {
+      try {
+        const response = await fetch(urlInput.value);
+        const file = await response.blob();
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(file);
+        link.download = new Date().getTime();
+        link.click();
+        console.log(response)
+      } catch (error) {
+        alert("failed");
       }
-    }
 
-    function onPlayerReady(event) {
-      event.target.play(); // Start the video automatically (optional)
-    }
-
-    // Function to extract video ID from YouTube URL
-    function getYoutubeVideoId(url) {
-      const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?v=))([^#&?]*).*/;
-      const match = url.match(regExp);
-      return (match && match[6]) || null;
-    }
+    })
   </script>
 </body>
 
