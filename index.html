@@ -1,34 +1,47 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>YouTube Video Embed</title>
+</head>
 
-    <body>
-        <p> file loeading ... </p>
-       <script>
-        const xhr = new XMLHttpRequest();
-xhr.open('GET', 'https://www.youtube.com/embed/7HnSBCShKCk');
-xhr.onload = function() {
-  if (xhr.status === 200) {
-    const data = JSON.parse(xhr.responseText);
-    console.log(data);
-  } else {
-    console.error(xhr.statusText);
-  }
-};
-xhr.send();
-        </script>
-        
- 
-    </body>
+<body>
+  <h1>Enter YouTube Video URL</h1>
+  <input type="text" id="videoUrl" placeholder="Paste YouTube URL here">
+  <button onclick="embedVideo()">Embed Video</button>
+  <br>
+  <div id="player"></div>
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script>
+    var player;
+
+    function embedVideo() {
+      const videoUrl = document.getElementById('https://www.youtube.com/embed/7HnSBCShKCk').value;
+      const videoId = getYoutubeVideoId(videoUrl); // Function to extract video ID
+      if (videoId) {
+        player = new YT.Player('player', {
+          videoId: videoId,
+          events: {
+            'onReady': onPlayerReady
+          }
+        });
+      } else {
+        alert("Invalid YouTube URL. Please enter a valid URL.");
+      }
+    }
+
+    function onPlayerReady(event) {
+      event.target.play(); // Start the video automatically (optional)
+    }
+
+    // Function to extract video ID from YouTube URL
+    function getYoutubeVideoId(url) {
+      const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?v=))([^#&?]*).*/;
+      const match = url.match(regExp);
+      return (match && match[6]) || null;
+    }
+  </script>
+</body>
+
 </html>
