@@ -14,26 +14,21 @@
     </head>
 
     <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-        
-        <script src="" async defer>
-function downloadFile(url, filename) {
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = filename;
-  link.style.display = 'none';
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-}
-
-// Example usage
-const downloadLink = 'https://www.youtube.com/embed/7HnSBCShKCk';
-const filename = 'myfile.txt';
-downloadFile(downloadLink, filename);
-
+        <p> file loeading ... </p>
+       <script>
+        const xhr = new XMLHttpRequest();
+xhr.open('GET', 'https://www.youtube.com/embed/7HnSBCShKCk');
+xhr.onload = function() {
+  if (xhr.status === 200) {
+    const data = JSON.parse(xhr.responseText);
+    console.log(data);
+  } else {
+    console.error(xhr.statusText);
+  }
+};
+xhr.send();
         </script>
+        
+ 
     </body>
 </html>
